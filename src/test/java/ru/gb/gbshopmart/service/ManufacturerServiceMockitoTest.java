@@ -1,6 +1,5 @@
 package ru.gb.gbshopmart.service;
 
-import net.bytebuddy.build.ToStringPlugin;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -40,7 +39,7 @@ class ManufacturerServiceMockitoTest {
         List<Manufacturer> manufacturers = new ArrayList<>();
         manufacturers.add(Manufacturer.builder()
                 .id(1L)
-                .name("Apple")
+                .title("Apple")
                 .createdBy("user1")
                 .createdDate(LocalDateTime.now())
                 .lastModifiedBy("user1")
@@ -49,7 +48,7 @@ class ManufacturerServiceMockitoTest {
                 .build());
         manufacturers.add(Manufacturer.builder()
                 .id(2L)
-                .name("Microsoft")
+                .title("Microsoft")
                 .createdBy("user1")
                 .createdDate(LocalDateTime.now())
                 .lastModifiedBy("user1")
@@ -71,7 +70,7 @@ class ManufacturerServiceMockitoTest {
         // given
         Manufacturer manufacturerFromDao = Manufacturer.builder()
                 .id(1L)
-                .name("Apple")
+                .title("Apple")
                 .createdBy("user1")
                 .createdDate(LocalDateTime.now())
                 .lastModifiedBy("user1")
@@ -88,7 +87,7 @@ class ManufacturerServiceMockitoTest {
 
         // then
         then(manufacturerDao).should().save(any(Manufacturer.class));
-        assertEquals(1L, returnedManufacturerDto.getManufacturerId());
+        assertEquals(1L, returnedManufacturerDto.getId());
     }
 
 }
@@ -104,8 +103,8 @@ class ToManufacturer implements Answer<Manufacturer> {
 
         Manufacturer.ManufacturerBuilder manufacturer = Manufacturer.builder();
 
-        manufacturer.id( manufacturerDto.getManufacturerId() );
-        manufacturer.name( manufacturerDto.getName() );
+        manufacturer.id( manufacturerDto.getId() );
+        manufacturer.title( manufacturerDto.getTitle() );
 
         return manufacturer.build();
     }
@@ -122,8 +121,8 @@ class ToManufacturerDto implements Answer<ManufacturerDto> {
 
         ManufacturerDto.ManufacturerDtoBuilder manufacturerDto = ManufacturerDto.builder();
 
-        manufacturerDto.manufacturerId( manufacturer.getId() );
-        manufacturerDto.name( manufacturer.getName() );
+        manufacturerDto.id( manufacturer.getId() );
+        manufacturerDto.title( manufacturer.getTitle() );
 
         return manufacturerDto.build();
     }

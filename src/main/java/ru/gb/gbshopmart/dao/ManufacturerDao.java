@@ -7,5 +7,5 @@ import ru.gb.gbshopmart.entity.Manufacturer;
 import java.util.Optional;
 
 public interface ManufacturerDao extends JpaRepository<Manufacturer, Long> {
-    Optional<Manufacturer> findByName(String name);
+    Optional<Manufacturer> findByTitle(String name);
 }

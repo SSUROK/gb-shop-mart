@@ -40,13 +40,13 @@ public class ManufacturerController {
     public ResponseEntity<?> handlePost(@Validated @RequestBody ManufacturerDto manufacturerDto) {
         ManufacturerDto savedManufacturer = manufacturerService.save(manufacturerDto);
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(URI.create("/api/v1/manufacturer/" + savedManufacturer.getManufacturerId()));
+        httpHeaders.setLocation(URI.create("/api/v1/manufacturer/" + savedManufacturer.getId()));
         return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
     }
 
     @PutMapping("/{manufacturerId}")
     public ResponseEntity<?> handleUpdate(@PathVariable("manufacturerId") Long id, @Validated @RequestBody ManufacturerDto manufacturerDto) {
-        manufacturerDto.setManufacturerId(id);
+        manufacturerDto.setId(id);
         manufacturerService.save(manufacturerDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

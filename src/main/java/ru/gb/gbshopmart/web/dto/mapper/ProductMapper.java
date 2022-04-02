@@ -16,11 +16,11 @@ public interface ProductMapper {
     ProductDto toProductDto(Product product);
 
     default Manufacturer getManufacturer(String manufacturer, @Context ManufacturerDao manufacturerDao) {
-        return manufacturerDao.findByName(manufacturer).orElseThrow(NoSuchElementException::new);
+        return manufacturerDao.findByTitle(manufacturer).orElseThrow(NoSuchElementException::new);
     }
 
     default String getManufacturer(Manufacturer manufacturer) {
-        return manufacturer.getName();
+        return manufacturer.getTitle();
     }
 
 }

@@ -39,8 +39,8 @@ class ManufacturerControllerMockMvcTest {
     public void findAllTest() throws Exception {
         List<ManufacturerDto> manufacturers = new ArrayList<>();
 
-        manufacturers.add(ManufacturerDto.builder().manufacturerId(1L).name("Apple").build());
-        manufacturers.add(ManufacturerDto.builder().manufacturerId(2L).name("Microsoft").build());
+        manufacturers.add(ManufacturerDto.builder().id(1L).title("Apple").build());
+        manufacturers.add(ManufacturerDto.builder().id(2L).title("Microsoft").build());
 
         given(manufacturerService.findAll()).willReturn(manufacturers);
 
@@ -48,7 +48,7 @@ class ManufacturerControllerMockMvcTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("id")))
                 .andExpect(jsonPath("$.[0].id").value("1"))
-                .andExpect(jsonPath("$.[0].name").value("Apple"))
+                .andExpect(jsonPath("$.[0].title").value("Apple"))
                 .andExpect(jsonPath("$.[1].id").value("2"));
     }
 
@@ -61,7 +61,7 @@ class ManufacturerControllerMockMvcTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper
                         .writeValueAsString(Manufacturer.builder()
-                                .name("Tesla")
+                                .title("Tesla")
                                 .build())))
                 .andExpect(status().isCreated());
     }

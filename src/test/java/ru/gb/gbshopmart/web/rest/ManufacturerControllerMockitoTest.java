@@ -44,8 +44,8 @@ class ManufacturerControllerMockitoTest {
 
     @BeforeEach
     void setUp() {
-        manufacturers.add(ManufacturerDto.builder().manufacturerId(1L).name("Apple").build());
-        manufacturers.add(ManufacturerDto.builder().manufacturerId(2L).name("Microsoft").build());
+        manufacturers.add(ManufacturerDto.builder().id(1L).title("Apple").build());
+        manufacturers.add(ManufacturerDto.builder().id(2L).title("Microsoft").build());
 
         mockMvc = MockMvcBuilders.standaloneSetup(manufacturerController).build();
     }
@@ -59,7 +59,7 @@ class ManufacturerControllerMockitoTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("id")))
                 .andExpect(jsonPath("$.[0].id").value("1"))
-                .andExpect(jsonPath("$.[0].name").value("Apple"))
+                .andExpect(jsonPath("$.[0].title").value("Apple"))
                 .andExpect(jsonPath("$.[1].id").value("2"));
 
     }
@@ -71,7 +71,7 @@ class ManufacturerControllerMockitoTest {
 
         mockMvc.perform(post("/api/v1/manufacturer")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\": \"Tesla\"}"))
+                        .content("{\"title\": \"Tesla\"}"))
                 .andExpect(status().isCreated());
     }
 
@@ -88,7 +88,7 @@ class ManufacturerControllerMockitoTest {
 
         assertAll(
                 () -> assertEquals(2, manufacturerList.size(), "Size must be equals 2"),
-                () -> assertEquals("Apple", manufacturerList.get(0).getName())
+                () -> assertEquals("Apple", manufacturerList.get(0).getTitle())
         );
     }
 }

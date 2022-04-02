@@ -45,4 +45,6 @@ public class InfoEntity extends BaseEntity {
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedDate = lastModifiedDate;
     }
+
+
 }

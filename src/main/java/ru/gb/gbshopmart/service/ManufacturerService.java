@@ -26,7 +26,7 @@ public class ManufacturerService {
     public ManufacturerDto save(final ManufacturerDto manufacturerDto) {
         Manufacturer manufacturer = manufacturerMapper.toManufacturer(manufacturerDto);
         if (manufacturer.getId() != null) {
-            manufacturerDao.findById(manufacturerDto.getManufacturerId()).ifPresent(
+            manufacturerDao.findById(manufacturerDto.getId()).ifPresent(
                     (p) -> manufacturer.setVersion(p.getVersion())
             );
         }

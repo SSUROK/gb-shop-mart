@@ -20,13 +20,13 @@ class ManufacturerDaoTest {
 
     @Test
     public void saveTest() {
-        Manufacturer manufacturer = Manufacturer.builder().name(MANUFACTURER_NAME).build();
+        Manufacturer manufacturer = Manufacturer.builder().title(MANUFACTURER_NAME).build();
 
         Manufacturer savedManufacturer = manufacturerDao.save(manufacturer);
 
         assertAll(
                 () -> assertEquals(1L, savedManufacturer.getId()),
-                () -> assertEquals(MANUFACTURER_NAME, savedManufacturer.getName()),
+                () -> assertEquals(MANUFACTURER_NAME, savedManufacturer.getTitle()),
                 () -> assertEquals(0, savedManufacturer.getVersion()),
                 () -> assertEquals("User", savedManufacturer.getCreatedBy()),
                 () -> assertEquals("User", savedManufacturer.getLastModifiedBy()),

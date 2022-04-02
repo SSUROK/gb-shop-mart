@@ -10,24 +10,24 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.gb.gbshopmart.entity.Category;
 import ru.gb.gbshopmart.entity.Manufacturer;
-import ru.gb.gbshopmart.web.dto.ManufacturerDto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ManufacturerControllerIntegTest {
+class CategoryControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -35,27 +35,31 @@ class ManufacturerControllerIntegTest {
     @Autowired
     ObjectMapper objectMapper;
 
-
     @Test
     @Order(1)
-    void testSaveManufacturerTest() throws Exception {
+    void testSaveCategoryTest() throws Exception {
 
-        mockMvc.perform(post("/api/v1/manufacturer")
+        mockMvc.perform(post("/api/v1/category")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper
-                                .writeValueAsString(Manufacturer.builder()
-                                        .title("Tesla")
+                                .writeValueAsString(Category.builder()
+                                        .title("New")
                                         .build())))
                 .andExpect(status().isCreated());
     }
 
     @Test
+    @Order(2)
     public void findAllTest() throws Exception {
-
-        mockMvc.perform(get("/api/v1/manufacturer"))
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        mockMvc.perform(get("/api/v1/category"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("id")))
                 .andExpect(jsonPath("$.[0].id").value("1"))
-                .andExpect(jsonPath("$.[0].title").value("Tesla"));
+                .andExpect(jsonPath("$.[0].title").value("New"))
+                .andExpect(jsonPath("$.[0].created_by").value("User"))
+                .andExpect(jsonPath("$.[0].created_date").value(LocalDateTime.now().format(formatter)))
+                .andExpect(jsonPath("$.[0].last_modified_by").value("User"))
+                .andExpect(jsonPath("$.[0].last_modified_date").value(LocalDateTime.now().format(formatter)));
     }
 }
