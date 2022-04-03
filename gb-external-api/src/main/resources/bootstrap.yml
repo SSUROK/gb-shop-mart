@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME:gb-external-api}
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    hikari:
+      driver-class-name: 'org.h2.Driver'

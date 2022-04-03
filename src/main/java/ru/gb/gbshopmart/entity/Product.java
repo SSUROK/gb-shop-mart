@@ -22,7 +22,8 @@ import java.util.Set;
 @Entity
 @Table (name = "product")
 @EntityListeners(AuditingEntityListener.class)
-public class Product extends InfoEntity {
+public class
+Product extends InfoEntity {
 
     @Column(name = "title")
     private String title;
@@ -38,7 +39,6 @@ public class Product extends InfoEntity {
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private Set<Category> categories;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;

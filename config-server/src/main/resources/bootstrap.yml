@@ -3,8 +3,8 @@ spring:
     name: ${SPRING_APPLICATION_NAME:config-server}
 encrypt:
   key-store:
-    alias: ${ENCRYPT_KEYSTORE_ALIAS:gbshopmart}
-    location: ${ENCRYPT_KEYSTORE_LOCATION:file:///Users/artemkropotov/java_projects/geekbrains/gb-shop-mart/server.jks}
+    alias: ${ENCRYPT_KEYSTORE_ALIAS:gbshopmart, gbshopexternal}
+    location: ${ENCRYPT_KEYSTORE_LOCATION:file:///Users/ilavinogradov/IdeaProjects/gb-shop-mart/server.jks}
     password: ${ENCRYPT_KEYSTORE_PASSWORD:123456}
 
 
