@@ -39,6 +39,9 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<?> handlePost(@Validated @RequestBody ProductDto productDto) {
         ProductDto savedProduct = productService.save(productDto);
+        if (savedProduct == null){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(URI.create("/api/v1/product/" + savedProduct.getId()));
         return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
@@ -47,7 +50,10 @@ public class ProductController {
     @PutMapping("/{productId}")
     public ResponseEntity<?> handleUpdate(@PathVariable("productId") Long id, @Validated @RequestBody ProductDto productDto) {
         productDto.setId(id);
-        productService.save(productDto);
+        ProductDto savedProduct = productService.save(productDto);
+        if (savedProduct == null){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

@@ -29,7 +29,8 @@ import static feign.Util.RETRY_AFTER;
 
 @Configuration
 @EnableFeignClients(clients = {CategoryGateway.class,
-        ProductGateway.class})
+        ProductGateway.class,
+        CategoryGateway.class})
 @EnableConfigurationProperties(GbApiProperties.class)
 @RequiredArgsConstructor
 public class FeignConfig {
@@ -59,6 +60,16 @@ public class FeignConfig {
                 ))
                 .contract(new SpringMvcContract())
                 .target(ManufacturerGateway.class, gbApiProperties.getEndpoint().getManufacturerUrl());
+    }
+
+    @Bean
+    public ProductGateway productGateway() {
+        return null;
+    }
+
+    @Bean
+    public CategoryGateway categoryGateway() {
+        return null;
     }
 
     private ErrorDecoder errorDecoder() {

@@ -33,7 +33,6 @@ class ManufacturerControllerIntegTest {
     @Test
     @Order(1)
     void testSaveManufacturerTest() throws Exception {
-
         mockMvc.perform(post("/api/v1/manufacturer")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper
