@@ -19,7 +19,7 @@
     <th scope="col">Почта</th>
 
     <div class="container">
-      <form th:action="@{/order}" th:object="${}" th:method="post">
+      <form th:action="@{/order}" th:object="${order}" th:method="post">
         <input type="hidden" th:field="*{id}">
         <div class="mb-3">
           <label for=" address-id" class="form-label">Адресс</label>

@@ -1,7 +1,5 @@
 server:
-  port: 8081
-  servlet:
-    context-path: '/external'
+  port: 24313
 spring:
   profiles:
     active: ${SPRING_PROFILES_INCLUDE:dev}
@@ -12,7 +10,14 @@ spring:
       label: ${SPRING_CLOUD_CONFIG_LABEL:master}
       username: ${SPRING_CLOUD_CONFIG_USERNAME:geek_user}
       password: ${SPRING_CLOUD_CONFIG_PASSWORD:geek_pass}
-jwt:
-  token:
-    expired: 86_400_000
-    secret: 'jwtsecret'
+  mail:
+    host: 'smtp.gmail.com'
+    port: 587
+    username: 'vinogradov.robot.sender@gmail.com'
+    password: 'Robot.send125'
+    properties:
+      mail:
+        smtp:
+          auth: 'true'
+          starttls:
+            enable: 'true'

@@ -14,25 +14,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.gb.gbapi.category.dto.CategoryDto;
-import ru.gb.gbapi.common.enums.Status;
 import ru.gb.gbapi.manufacturer.dto.ManufacturerDto;
-import ru.gb.gbapi.product.dto.ProductDto;
-import ru.gb.gbshopmart.entity.Category;
-import ru.gb.gbshopmart.entity.Manufacturer;
-import ru.gb.gbshopmart.entity.Product;
 import ru.gb.gbshopmart.service.CategoryService;
 import ru.gb.gbshopmart.service.ManufacturerService;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ProductControllerTest {
+class ProductRestControllerTest {
 
     @Mock
     CategoryService categoryService;
@@ -48,9 +36,9 @@ class ProductControllerTest {
     ManufacturerService manufacturerService;
 
     @InjectMocks
-    ManufacturerController manufacturerController;
+    ManufacturerRestController manufacturerRestController;
     @InjectMocks
-    CategoryController categoryController;
+	CategoryRestController categoryRestController;
 
     List<ManufacturerDto> manufacturers = new ArrayList<>();
     List<CategoryDto> categories = new ArrayList<>();
@@ -67,7 +55,7 @@ class ProductControllerTest {
 
         categories.add(CategoryDto.builder().id(1L).title("Phone").build());
 
-        mockMvc = MockMvcBuilders.standaloneSetup(manufacturerController, categoryController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(manufacturerRestController, categoryRestController).build();
     }
 
 //    @Test

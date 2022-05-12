@@ -6,7 +6,7 @@ security:
     decrypt:
       enabled: true
 server:
-  port: ${PORT:8888}
+  port: ${PORT:7777}
 spring:
   cloud:
     config:

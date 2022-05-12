@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/product")
-public class ProductThymeleafController {
+public class ProductController {
 
     private final ProductService productService;
 
